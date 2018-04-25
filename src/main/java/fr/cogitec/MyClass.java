@@ -23,23 +23,23 @@ public class MyClass {
         sentry = SentryClientFactory.sentryClient();
 
         MyClass myClass = new MyClass();
-        myClass.logWithStaticAPI();
-        myClass.logWithInstanceAPI();
+        //myClass.logWithStaticAPI();
+        //myClass.logWithInstanceAPI();
         myClass.logSimpleMessage();
-        myClass.logException();
+        //myClass.logException();
     }
 
     /**
      * An example method that throws an exception.
      */
-    void unsafeMethod() {
+    private void unsafeMethod() {
         throw new UnsupportedOperationException("You shouldn't call this!");
     }
 
     /**
      * Examples using the (recommended) static API.
      */
-    void logWithStaticAPI() {
+    private void logWithStaticAPI() {
         // Note that all fields set on the context are optional. Context data is copied onto
         // all future events in the current context (until the context is cleared).
 
@@ -77,7 +77,7 @@ public class MyClass {
     /**
      * Examples that use the SentryClient instance directly.
      */
-    void logWithInstanceAPI() {
+    private void logWithInstanceAPI() {
         // Retrieve the current context.
         Context context = sentry.getContext();
 
@@ -98,7 +98,7 @@ public class MyClass {
         }
     }
 
-    void logSimpleMessage() {
+    private void logSimpleMessage() {
         // This sends an event to Sentry.
         EventBuilder eventBuilder = new EventBuilder()
                 .withMessage("This is a test")
@@ -110,7 +110,7 @@ public class MyClass {
         Sentry.capture(eventBuilder);
     }
 
-    void logException() {
+    private void logException() {
         try {
             unsafeMethod();
         } catch (Exception e) {
